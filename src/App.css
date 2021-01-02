@@ -1,0 +1,26 @@
+.chart-container{
+    display: flex;
+}
+
+.settings-sidebar{
+    padding: 15px;
+    width: 300px;
+    min-width: 300px !important;
+    height: 100vh;
+    background-color: grey;
+}
+
+.chartjs-render-monitor{
+    width: 100% !important;
+    height: auto !important;
+}
+
+.code-container{
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 100%;
+    min-height: 50px;
+    color: green;
+    background-color: #0e0e0e;
+}
