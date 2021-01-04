@@ -1,21 +1,51 @@
 import React from "react";
 import BarChart from "../chart-types/bar-chart"
+
+function TableRow(props) {
+    const rows = props.values.labels.map((item, index) => {
+        return (
+            <div className="input-row" key={index}>
+                <input type="text" className="input-row-item" value={item} onChange={(e) => props.f(e, "labels", index)} />
+                <input type="text" className="input-row-item" value={props.values.data[index]} onChange={(e) => props.f(e, "data", index)} />
+            </div>
+        )
+    })
+    return rows
+}
+
 class BarSettings extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            chartTitle: "Hello",
+            labels: ['January', 'February'],
+            chartTitle: "My First Dataset",
             borderWidth: 2,
-            fillColor: "#e76f51",
-            fillHover: "#fffff",
-            borderColor: "#e76f51",
-            borderHover: "#fffff",
+            fillColor: "#48cae4",
+            fillHover: "#A197FB",
+            borderColor: "#00b4d8",
+            borderHover: "#f1f1f1",
+            data: [10, 59, 0]
         }
 
     }
+
+    datasetChanged = (event, key, index) => {
+        var v = event.target.value
+        if (key === "data" && v != '')
+            v = parseInt(v)
+        this.setState(prevState => {
+            var temp = new Array();
+            prevState[key].map((i, prevIndex) => {
+                if (index == prevIndex)
+                    temp.push(v);
+                else temp.push(i)
+            })
+            if (key == "data") return { data: temp }
+            else return { labels: temp }
+        })
+    }
+
     dataChange = (event, key) => {
-        // For loop all states
-        // if key matches value item then update
         this.setState(prevState => {
             prevState[key] = event.target.value;
             return {
@@ -24,7 +54,59 @@ class BarSettings extends React.Component {
                 fillColor: prevState.fillColor,
                 fillHover: prevState.fillHover,
                 borderColor: prevState.borderColor,
-                borderHover: prevState.borderHover
+                borderHover: prevState.borderHover,
+                data: prevState.data,
+                labels: prevState.labels
+            }
+        })
+    }
+
+    toggleSettings(id) {
+        console.log(id)
+        if (document.getElementById(id)) {
+            var element = document.getElementById(id);
+            if (element.style.display == "none")
+                document.getElementById(id).style.display = "block";
+            else
+                document.getElementById(id).style.display = "none";
+        }
+    }
+
+    addRow = () => {
+        this.setState(prevState => {
+            var tempData = new Array();
+            var tempLabel = new Array();
+            prevState.data.map(i => {
+                tempData.push(i)
+            })
+            prevState.labels.map(i => {
+                tempLabel.push(i)
+            })
+            tempData.push(0);
+            tempLabel.push("Label");
+            return {
+                data: tempData,
+                labels: tempLabel
+            }
+        })
+    }
+
+    removeRow = () => {
+        this.setState(prevState => {
+            var tempData = new Array();
+            var tempLabel = new Array();
+            prevState.data.map((i, index) => {
+                if (index != prevState.data.length - 1)
+                    tempData.push(i)
+            })
+            tempData[tempData.length-1] = 0;
+            prevState.labels.map((i, index) => {
+                if (index != prevState.labels.length - 1)
+                    tempLabel.push(i)
+            })
+            return {
+                data: tempData,
+                labels: tempLabel
             }
         })
     }
@@ -34,11 +116,22 @@ class BarSettings extends React.Component {
             <div style={{ display: "flex" }}>
 
                 <div className="settings-sidebar">
-                    <h1 className="text-center">Report Settings</h1>
-                    <div className="settings-option-title">Dataset</div>
+                    <h1 className="text-center">Bar Chart Settings</h1>
                     <div>
-                        <div className="settings-option-title">Settings</div>
-                        <form className="settings-options">
+                        <div className="settings-option-title" onClick={() => this.toggleSettings("dataset-dropdown")}>Dataset</div>
+                        <div className="dataset-table" id="dataset-dropdown">
+                            <div style={{ display: "flex" }}>
+                                <div className="table-head-item">Label</div>
+                                <div className="table-head-item">Value</div>
+                            </div>
+                            <TableRow values={this.state} f={this.datasetChanged} />
+                            <div className="add-input" onClick={this.addRow}><i className="fas fa-plus" /></div>
+                            <div className="add-input" onClick={this.removeRow}><i className="fas fa-minus" /></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="settings-option-title" onClick={() => this.toggleSettings("settings-dropdown")}>Settings</div>
+                        <form className="settings-options" id="settings-dropdown">
                             {/* Chart Title */}
                             <div className="settings-option">
                                 <label className="settings-option-label">Chart Title</label>

@@ -67,9 +67,9 @@ a{
     border-radius: 15px;
     max-width: 100%;
     min-height: 50px;
-    color: green;
-    background: #16191b
-                }
+    color: #0AEBFF;
+    background: #16191b;
+}
 
 .right-side{
     width: 100%;
@@ -115,4 +115,54 @@ a{
     background-color: transparent;
     width: 25px;
     margin-right: 5px;
+}
+
+.dataset-table{
+    width: 300px;
+    text-align: center;
+    background-color: #1b1f22;
+    margin-bottom: 15px;
+}
+
+.table-input{
+    height: 20px;
+    width: auto;
+    text-align: center;
+    background-color: transparent;
+    color: whitesmoke;
+    border: none;
+    border-bottom: 1px solid white;
+
+}
+
+.input-row{
+    display: flex;
+    height: 50px;
+}
+
+.input-row-item{
+    text-align: center;
+    font-size: 18px;
+    width: 50%;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+
+.table-head-item{
+    width: 50%;
+    text-align: center;
+    padding: 20px;
+    background-color: #1b1f22;
+}
+
+.add-input{
+    color: white;
+    border: 1px solid white;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.add-input:hover{
+    background-color: rgba(206, 206, 206, 0.822);
 }
