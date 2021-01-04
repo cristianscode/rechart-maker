@@ -1,13 +1,59 @@
+
+body{
+    background: #121416;
+    color: rgb(238, 236, 236);
+    margin: 0px;
+    max-height: 100vh;
+}
+
+a{
+    width: 33.33%;
+    display: block;
+    color: #f9f9f9;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.selection-title{
+    margin-bottom: 50px;
+    color: #f9f9f9;
+    font-size: 5em;
+    letter-spacing: 5px;
+}
+
+.selection-text{
+    font-weight: 200;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.chart-option{
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #101214, #131518);
+    box-shadow:  8px 8px 11px #0e0f11,
+                 -8px -8px 11px #16191b;
+    width: 100px;
+    height: 100px;
+    margin: 0px auto;
+}
+
+.text-center{
+    width: 100%;
+    text-align: center;
+}
+
 .chart-container{
     display: flex;
 }
 
 .settings-sidebar{
     padding: 15px;
+    margin: 0px;
     width: 300px;
     min-width: 300px !important;
-    height: 100vh;
-    background-color: grey;
+    min-height: 100vh;
+    background-color: #121416;
 }
 
 .chartjs-render-monitor{
@@ -22,5 +68,51 @@
     max-width: 100%;
     min-height: 50px;
     color: green;
-    background-color: #0e0e0e;
+    background: #16191b
+                }
+
+.right-side{
+    width: 100%;
+     background-color: #1b1f22;
+     margin: 50px;
+     margin-left: 0px;
+     padding: 25px;
+     border-radius: 20px;
+}
+
+.settings-option-title{
+    padding: 15px;
+    background-color: #006d77;
+    color: white;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.settings-option-title:hover{
+    background-color: #83c5be;
+}
+
+.settings-options{
+    background-color: #1b1f22;
+}
+
+.settings-option{
+    padding: 15px;
+}
+
+.settings-option-label{
+    font-size: 14px;
+}
+
+.settings-option-input{
+    float: right;
+    text-align: right;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    border-radius: 0px;
+    background-color: transparent;
+    width: 25px;
+    margin-right: 5px;
 }

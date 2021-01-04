@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 function DoughnutSettings() {
+    const [firstName, setFirstName] = useState('');
+
     return (
         <div className="settings-sidebar">
-            <h1>Report Settings</h1>
+            <input name="firstName" onChange={e => setFirstName(e.target.value)} />
+            <div>{firstName}</div>
         </div>
     )
 }
