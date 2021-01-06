@@ -82,7 +82,7 @@ a{
 
 .settings-option-title{
     padding: 15px;
-    background-color: #006d77;
+    background-color: #283845;
     color: white;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -90,7 +90,7 @@ a{
 }
 
 .settings-option-title:hover{
-    background-color: #83c5be;
+    background-color: #069eac;
 }
 
 .settings-options{
@@ -152,7 +152,7 @@ a{
 .table-head-item{
     width: 50%;
     text-align: center;
-    padding: 20px;
+    margin: 10px;
     background-color: #1b1f22;
 }
 
@@ -177,4 +177,18 @@ a{
 
 .barType.active{
     background-color: #3E143E;
+}
+
+.dataset-extraColSelect{
+    background-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.274);
+    max-width: 75px;
+    appearance: none;
+    padding: 2px 3px 0px 3px;
 }

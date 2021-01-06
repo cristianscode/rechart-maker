@@ -11,10 +11,10 @@ function SettingsToString(props) {
                 &emsp;&emsp;{"datasets: [{"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"label: '" + props.state.datasets[0].label + "',"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"backgroundColor: [" + props.state.datasets[0].backgroundColor.map(item => { return "'" + item + "'"; }) + "],"} <br />
-                &emsp;&emsp;&emsp;&emsp;{"borderColor: '" + props.state.datasets[0].borderColor + "',"} <br />
+                &emsp;&emsp;&emsp;&emsp;{"borderColor: [" + props.state.datasets[0].borderColor.map(item => { return "'" + item + "'"; }) + "],"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"borderWidth: " + props.state.datasets[0].borderWidth}, <br />
-                &emsp;&emsp;&emsp;&emsp;{"hoverBackgroundColor: '" + props.state.datasets[0].hoverBackgroundColor + "',"} <br />
-                &emsp;&emsp;&emsp;&emsp;{"hoverBorderColor: '" + props.state.datasets[0].hoverBorderColor + "',"} <br />
+                &emsp;&emsp;&emsp;&emsp;{"hoverBackgroundColor: [" + props.state.datasets[0].hoverBackgroundColor.map(item => { return "'" + item + "'"; }) + "],"} <br />
+                &emsp;&emsp;&emsp;&emsp;{"hoverBorderColor: [" + props.state.datasets[0].hoverBorderColor.map(item => { return "'" + item + "'"; }) + "],"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"data: [" + props.state.datasets[0].data + "]"} <br />
                 &emsp;&emsp;{"}]"}<br />
                 {"}"}
