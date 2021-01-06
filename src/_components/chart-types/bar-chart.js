@@ -1,6 +1,6 @@
 import React from "react"
 import BarSettings from "../chart-settings/bar-settings"
-import { HorizontalBar, Bar } from "react-chartjs-2"
+import { HorizontalBar, Bar, Doughnut, Line } from "react-chartjs-2"
 
 function SettingsToString(props) {
     return (
@@ -10,7 +10,7 @@ function SettingsToString(props) {
                 &emsp;&emsp;{"labels: [" + props.state.labels.map(item => { return "'" + item + "'"; }) + "],"}<br />
                 &emsp;&emsp;{"datasets: [{"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"label: '" + props.state.datasets[0].label + "',"} <br />
-                &emsp;&emsp;&emsp;&emsp;{"backgroundColor: '" + props.state.datasets[0].backgroundColor + "',"} <br />
+                &emsp;&emsp;&emsp;&emsp;{"backgroundColor: [" + props.state.datasets[0].backgroundColor.map(item => { return "'" + item + "'"; }) + "],"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"borderColor: '" + props.state.datasets[0].borderColor + "',"} <br />
                 &emsp;&emsp;&emsp;&emsp;{"borderWidth: " + props.state.datasets[0].borderWidth}, <br />
                 &emsp;&emsp;&emsp;&emsp;{"hoverBackgroundColor: '" + props.state.datasets[0].hoverBackgroundColor + "',"} <br />

@@ -7,6 +7,7 @@ function TableRow(props) {
             <div className="input-row" key={index}>
                 <input type="text" className="input-row-item" value={item} onChange={(e) => props.f(e, "labels", index)} />
                 <input type="text" className="input-row-item" value={props.values.data[index]} onChange={(e) => props.f(e, "data", index)} />
+                <input type="text" className="input-row-item" value={props.values.fillColor[index]} onChange={(e) => props.f(e, "fillColor", index)} />
             </div>
         )
     })
@@ -20,7 +21,7 @@ class BarSettings extends React.Component {
             labels: ['January', 'February'],
             chartTitle: "My First Dataset",
             borderWidth: 2,
-            fillColor: "#48cae4",
+            fillColor: ["#48cae4", "#ffd6a5"],
             fillHover: "#A197FB",
             borderColor: "#00b4d8",
             borderHover: "#f1f1f1",
@@ -41,13 +42,19 @@ class BarSettings extends React.Component {
                 else temp.push(i)
             })
             if (key == "data") return { data: temp }
-            else return { labels: temp }
+            else if (key == "labels") return { labels: temp }
+            else if (key == "fillColor") return { fillColor: temp }
         })
     }
 
     dataChange = (event, key) => {
         this.setState(prevState => {
-            prevState[key] = event.target.value;
+            if (key == "fillColor") {
+                prevState[key] = prevState[key].map(i => {
+                    return event.target.value
+                })
+            } else
+                prevState[key] = event.target.value;
             return {
                 chartTitle: prevState.chartTitle,
                 borderWidth: prevState.borderWidth,
@@ -76,17 +83,23 @@ class BarSettings extends React.Component {
         this.setState(prevState => {
             var tempData = new Array();
             var tempLabel = new Array();
+            var tempFill = new Array();
             prevState.data.map(i => {
                 tempData.push(i)
             })
             prevState.labels.map(i => {
                 tempLabel.push(i)
             })
+            prevState.fillColor.map(i => {
+                tempFill.push(i)
+            })
             tempData.push(0);
             tempLabel.push("Label");
+            tempFill.push("#48cae4");
             return {
                 data: tempData,
-                labels: tempLabel
+                labels: tempLabel,
+                fillColor: tempFill
             }
         })
     }
@@ -95,14 +108,19 @@ class BarSettings extends React.Component {
         this.setState(prevState => {
             var tempData = new Array();
             var tempLabel = new Array();
+            var tempColor = new Array();
             prevState.data.map((i, index) => {
                 if (index != prevState.data.length - 1)
                     tempData.push(i)
             })
-            tempData[tempData.length-1] = 0;
+            tempData[tempData.length - 1] = 0;
             prevState.labels.map((i, index) => {
                 if (index != prevState.labels.length - 1)
                     tempLabel.push(i)
+            })
+            prevState.fillColor.map((i, index) => {
+                if (index != prevState.fillColor.length - 1)
+                    tempColor.push(i)
             })
             return {
                 data: tempData,
@@ -123,6 +141,7 @@ class BarSettings extends React.Component {
                             <div style={{ display: "flex" }}>
                                 <div className="table-head-item">Label</div>
                                 <div className="table-head-item">Value</div>
+                                <div className="table-head-item">Fill</div>
                             </div>
                             <TableRow values={this.state} f={this.datasetChanged} />
                             <div className="add-input" onClick={this.addRow}><i className="fas fa-plus" /></div>
