@@ -166,3 +166,15 @@ a{
 .add-input:hover{
     background-color: rgba(206, 206, 206, 0.822);
 }
+
+.barType{
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    background-color: #1F0A1F;
+}
+
+.barType.active{
+    background-color: #3E143E;
+}

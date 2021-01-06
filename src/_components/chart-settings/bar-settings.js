@@ -20,14 +20,28 @@ class BarSettings extends React.Component {
         this.state = {
             labels: ['January', 'February'],
             chartTitle: "My First Dataset",
+            chartType: "Vertical",
             borderWidth: 2,
-            fillColor: ["#48cae4", "#ffd6a5"],
+            fillColor: ["#48cae4", "#3E143E"],
             fillHover: "#A197FB",
             borderColor: "#00b4d8",
             borderHover: "#f1f1f1",
             data: [10, 59, 0]
         }
 
+    }
+
+    toggleBarType(type) {
+        this.setState(prevState => {
+            if(type == "Vertical") {
+                document.getElementById("verticalBar").className = "barType active";
+                document.getElementById("horizontalBar").className = "barType";
+            }else{
+                document.getElementById("horizontalBar").className = "barType active";
+                document.getElementById("verticalBar").className = "barType";
+            }
+            return {chartType: type}
+        })
     }
 
     datasetChanged = (event, key, index) => {
@@ -132,9 +146,12 @@ class BarSettings extends React.Component {
     render = () => {
         return (
             <div style={{ display: "flex" }}>
-
                 <div className="settings-sidebar">
                     <h1 className="text-center">Bar Chart Settings</h1>
+                    <div style={{ display: "flex", marginBottom: 15 }}>
+                        <div id="verticalBar" className="barType active" onClick={() => this.toggleBarType("Vertical")}>Vertical</div>
+                        <div id="horizontalBar" className="barType" onClick={() => this.toggleBarType("Horizontal")}>Horizontal</div>
+                    </div>
                     <div>
                         <div className="settings-option-title" onClick={() => this.toggleSettings("dataset-dropdown")}>Dataset</div>
                         <div className="dataset-table" id="dataset-dropdown">

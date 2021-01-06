@@ -23,6 +23,12 @@ function SettingsToString(props) {
     )
 }
 
+function GetChart(props){
+    if(props.type == "Vertical")
+        return <Bar data={props.state} />
+    return <HorizontalBar data={props.state} />
+}
+
 function BarChart(props) {
     const state = {
         labels: props.values.labels,
@@ -44,7 +50,9 @@ function BarChart(props) {
         <div className="chart-container">
             {/* <BarSettings /> */}
             <div className="right-side">
-                <div className="center"><Bar data={state} /></div>
+                <div className="center">
+                    <GetChart state={state} type={props.values.chartType} />
+                </div>
                 <div className="code-container">
                     <code id="code-state">
                         <SettingsToString state={state} />
