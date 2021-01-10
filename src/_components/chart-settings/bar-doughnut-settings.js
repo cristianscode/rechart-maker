@@ -185,16 +185,18 @@ class BarDoughnutSettings extends React.Component {
     render = () => {
         var chartType = "Vertical";
         var chartTypeAlt = "Horizontal";
+        var settingTitle = "Bar Chart Settings";
         var barChart = true;
         if (this.state.chartType.toLowerCase() == "doughnut" || this.state.chartType.toLowerCase() == "pie") {
             chartType = "Doughnut";
             chartTypeAlt = "Pie";
+            settingTitle = "DoughPie Chart Settings"
             barChart = false;
         }
         return (
             <div style={{ display: "flex" }}>
                 <div className="settings-sidebar">
-                    <h1 className="text-center">Bar Chart Settings</h1>
+                    <h2 className="text-center">{settingTitle}</h2>
                     <div style={{ display: "flex", marginBottom: 15 }}>
                         <div id="chartType" className="barType active" onClick={() => this.toggleBarType(chartType)}>{chartType}</div>
                         <div id="chartAlt" className="barType" onClick={() => this.toggleBarType(chartTypeAlt)}>{chartTypeAlt}</div>
