@@ -1,8 +1,7 @@
 import React from "react";
-import BarChart from "../chart-types/bar-chart"
+import BarDoughnutChart from "../chart-types/bar-doughnut-chart";
 
 function TableRow(props) {
-    console.log("HASJD")
     var extraColValue = "fillColor"
     if (document.getElementById("extraColSelect"))
         extraColValue = document.getElementById("extraColSelect").value
@@ -19,32 +18,36 @@ function TableRow(props) {
     return rows
 }
 
-class BarSettings extends React.Component {
+class BarDoughnutSettings extends React.Component {
     constructor(props) {
+        var location = window.location.href.split("/");
+        var chartType = location[location.length - 1]
         super(props)
         this.state = {
             extraCol: "fillColor",
             labels: ['January', 'February'],
             chartTitle: "My First Dataset",
-            chartType: "Vertical",
+            chartType: chartType,
             borderWidth: 2,
             fillColor: ["#48cae4", "#3E143E"],
             fillHover: ["#283845", "#283845"],
             borderColor: ["#00b4d8", "#00b4d8"],
             borderHover: ["#f1f1f1", "#f1f1f1"],
-            data: [10, 59, 0]
+            data: [10, 59, 0],
+            titleColor: "#666",
+            showTitle: true
         }
 
     }
 
     toggleBarType(type) {
         this.setState(prevState => {
-            if (type == "Vertical") {
-                document.getElementById("verticalBar").className = "barType active";
-                document.getElementById("horizontalBar").className = "barType";
+            if (type == "Vertical" || type == "Doughnut") {
+                document.getElementById("chartType").className = "barType active";
+                document.getElementById("chartAlt").className = "barType";
             } else {
-                document.getElementById("horizontalBar").className = "barType active";
-                document.getElementById("verticalBar").className = "barType";
+                document.getElementById("chartAlt").className = "barType active";
+                document.getElementById("chartType").className = "barType";
             }
             return { chartType: type }
         })
@@ -71,13 +74,14 @@ class BarSettings extends React.Component {
     }
 
     dataChange = (event, key) => {
-        console.log(key)
-        console.log(event.target.value)
         this.setState(prevState => {
             if (key == "fillColor" || key == "fillHover" || key == "borderColor" || key == "borderHover") {
                 prevState[key] = prevState[key].map(i => {
                     return event.target.value
                 })
+            } else if (key == "showTitle") {
+                prevState[key] = !prevState[key];
+                console.log(prevState[key])
             } else
                 prevState[key] = event.target.value;
             return {
@@ -88,7 +92,8 @@ class BarSettings extends React.Component {
                 borderColor: prevState.borderColor,
                 borderHover: prevState.borderHover,
                 data: prevState.data,
-                labels: prevState.labels
+                labels: prevState.labels,
+                showTitle: prevState.showTitle
             }
         })
     }
@@ -178,13 +183,21 @@ class BarSettings extends React.Component {
     }
 
     render = () => {
+        var chartType = "Vertical";
+        var chartTypeAlt = "Horizontal";
+        var barChart = true;
+        if (this.state.chartType.toLowerCase() == "doughnut" || this.state.chartType.toLowerCase() == "pie") {
+            chartType = "Doughnut";
+            chartTypeAlt = "Pie";
+            barChart = false;
+        }
         return (
             <div style={{ display: "flex" }}>
                 <div className="settings-sidebar">
                     <h1 className="text-center">Bar Chart Settings</h1>
                     <div style={{ display: "flex", marginBottom: 15 }}>
-                        <div id="verticalBar" className="barType active" onClick={() => this.toggleBarType("Vertical")}>Vertical</div>
-                        <div id="horizontalBar" className="barType" onClick={() => this.toggleBarType("Horizontal")}>Horizontal</div>
+                        <div id="chartType" className="barType active" onClick={() => this.toggleBarType(chartType)}>{chartType}</div>
+                        <div id="chartAlt" className="barType" onClick={() => this.toggleBarType(chartTypeAlt)}>{chartTypeAlt}</div>
                     </div>
                     <div>
                         <div className="settings-option-title" onClick={() => this.toggleSettings("dataset-dropdown")}>Dataset</div>
@@ -214,6 +227,13 @@ class BarSettings extends React.Component {
                                 <label className="settings-option-label">Chart Title</label>
                                 <input type="text" value={this.state.chartTitle} onChange={(e) => this.dataChange(e, "chartTitle")} className="settings-option-input" style={{ width: 150 }} />
                             </div>
+                            {/* Show Title */}
+                            {!barChart &&
+                                <div className="settings-option">
+                                    <label className="settings-option-label">Show Title</label>
+                                    <input type="checkbox" checked={this.state.showTitle} onChange={(e) => this.dataChange(e, "showTitle")} className="settings-option-input" />
+                                </div>
+                            }
                             {/* Border Width */}
                             <div className="settings-option">
                                 <label className="settings-option-label">Border Width</label>
@@ -222,6 +242,13 @@ class BarSettings extends React.Component {
                                 px
                             </div>
                             </div>
+                            {/* Background Color */}
+                            {!barChart && this.state.showTitle &&
+                                <div className="settings-option">
+                                    <label className="settings-option-label">Title Color</label>
+                                    <input type="color" value={this.state.titleColor} onChange={(e) => this.dataChange(e, "titleColor")} className="settings-option-input" style={{ border: "none" }} />
+                                </div>
+                            }
                             {/* Background Color */}
                             <div className="settings-option">
                                 <label className="settings-option-label">Fill Color</label>
@@ -245,11 +272,11 @@ class BarSettings extends React.Component {
                         </form>
                     </div>
                 </div>
-                <BarChart values={this.state} handleChange={this.dataChange} />
+                <BarDoughnutChart values={this.state} handleChange={this.dataChange} />
             </div>
 
         )
     }
 }
 
-export default BarSettings
+export default BarDoughnutSettings
