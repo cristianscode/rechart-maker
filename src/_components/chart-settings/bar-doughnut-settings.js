@@ -42,7 +42,7 @@ class BarDoughnutSettings extends React.Component {
 
     toggleBarType(type) {
         this.setState(prevState => {
-            if (type == "Vertical" || type == "Doughnut") {
+            if (type === "Vertical" || type === "Doughnut") {
                 document.getElementById("chartType").className = "barType active";
                 document.getElementById("chartAlt").className = "barType";
             } else {
@@ -55,31 +55,31 @@ class BarDoughnutSettings extends React.Component {
 
     datasetChanged = (event, key, index) => {
         var v = event.target.value
-        if (key === "data" && v != '')
+        if (key === "data" && v !== '')
             v = parseInt(v)
         this.setState(prevState => {
             var temp = new Array();
             prevState[key].map((i, prevIndex) => {
-                if (index == prevIndex)
+                if (index === prevIndex)
                     temp.push(v);
                 else temp.push(i)
             })
-            if (key == "data") return { data: temp }
-            else if (key == "labels") return { labels: temp }
-            else if (key == "fillColor") return { fillColor: temp }
-            else if (key == "fillHover") return { fillHover: temp }
-            else if (key == "borderColor") return { borderColor: temp }
-            else if (key == "borderHover") return { borderHover: temp }
+            if (key === "data") return { data: temp }
+            else if (key === "labels") return { labels: temp }
+            else if (key === "fillColor") return { fillColor: temp }
+            else if (key === "fillHover") return { fillHover: temp }
+            else if (key === "borderColor") return { borderColor: temp }
+            else if (key === "borderHover") return { borderHover: temp }
         })
     }
 
     dataChange = (event, key) => {
         this.setState(prevState => {
-            if (key == "fillColor" || key == "fillHover" || key == "borderColor" || key == "borderHover") {
+            if (key === "fillColor" || key === "fillHover" || key === "borderColor" || key === "borderHover") {
                 prevState[key] = prevState[key].map(i => {
                     return event.target.value
                 })
-            } else if (key == "showTitle") {
+            } else if (key === "showTitle") {
                 prevState[key] = !prevState[key];
                 console.log(prevState[key])
             } else
@@ -101,7 +101,7 @@ class BarDoughnutSettings extends React.Component {
     toggleSettings(id) {
         if (document.getElementById(id)) {
             var element = document.getElementById(id);
-            if (element.style.display == "none")
+            if (element.style.display === "none")
                 document.getElementById(id).style.display = "block";
             else
                 document.getElementById(id).style.display = "none";
@@ -187,7 +187,7 @@ class BarDoughnutSettings extends React.Component {
         var chartTypeAlt = "Horizontal";
         var settingTitle = "Bar Chart Settings";
         var barChart = true;
-        if (this.state.chartType.toLowerCase() == "doughnut" || this.state.chartType.toLowerCase() == "pie") {
+        if (this.state.chartType.toLowerCase() === "doughnut" || this.state.chartType.toLowerCase() === "pie") {
             chartType = "Doughnut";
             chartTypeAlt = "Pie";
             settingTitle = "DoughPie Chart Settings"
@@ -225,10 +225,12 @@ class BarDoughnutSettings extends React.Component {
                         <div className="settings-option-title" onClick={() => this.toggleSettings("settings-dropdown")}>Settings</div>
                         <form className="settings-options" id="settings-dropdown">
                             {/* Chart Title */}
-                            <div className="settings-option">
-                                <label className="settings-option-label">Chart Title</label>
-                                <input type="text" value={this.state.chartTitle} onChange={(e) => this.dataChange(e, "chartTitle")} className="settings-option-input" style={{ width: 150 }} />
-                            </div>
+                            {this.state.showTitle &&
+                                <div className="settings-option">
+                                    <label className="settings-option-label">Chart Title</label>
+                                    <input type="text" value={this.state.chartTitle} onChange={(e) => this.dataChange(e, "chartTitle")} className="settings-option-input" style={{ width: 150 }} />
+                                </div>
+                            }
                             {/* Show Title */}
                             {!barChart &&
                                 <div className="settings-option">

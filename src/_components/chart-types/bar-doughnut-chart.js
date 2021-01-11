@@ -2,7 +2,7 @@ import React from "react"
 import { HorizontalBar, Bar, Doughnut, Pie } from "react-chartjs-2"
 
 function SettingsToString(props) {
-    if (props.type.toLowerCase() == "pie" || props.type.toLowerCase() == "doughnut") {
+    if (props.type.toLowerCase() === "pie" || props.type.toLowerCase() === "doughnut") {
         return (
             <div>
                 <p>
@@ -60,9 +60,9 @@ function SettingsToString(props) {
 }
 
 function GetChart(props) {
-    if (props.type.toLowerCase() == "vertical" || props.type.toLowerCase() == "bar") return <Bar data={props.state} />
-    else if (props.type.toLowerCase() == "doughnut") return <Doughnut data={props.state} options={props.options} />
-    else if (props.type.toLowerCase() == "pie") return <Pie data={props.state} options={props.options} />
+    if (props.type.toLowerCase() === "vertical" || props.type.toLowerCase() === "bar") return <Bar data={props.state} />
+    else if (props.type.toLowerCase() === "doughnut") return <Doughnut data={props.state} options={props.options} />
+    else if (props.type.toLowerCase() === "pie") return <Pie data={props.state} options={props.options} />
     else return <HorizontalBar data={props.state} />
 }
 

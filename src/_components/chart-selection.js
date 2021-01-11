@@ -20,7 +20,7 @@ function ChartSelection() {
                 <Link to="/doughnut">
                     <div className="chart-option">
                         <i class="fas fa-chart-pie fa-2x text-center"></i>
-                        <p className="text-center selection-text">Doughnut Chart</p>
+                        <p className="text-center selection-text">DoughPie Chart</p>
                     </div>
                 </Link>
             </div>
