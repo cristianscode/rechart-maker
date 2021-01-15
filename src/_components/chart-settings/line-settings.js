@@ -139,7 +139,7 @@ class LineSettings extends React.Component {
                     <h1>Line Chart Settings</h1>
                     <div>
                         <div className="settings-option-title" onClick={() => this.toggleSettings("dataset-dropdown")}>Dataset</div>
-                        <div id="dataset-dropdown">
+                        <div id="dataset-dropdown" style={{display: "none", margin: 25}}>
                             <div className="dataset-table" style={{ width: "100%" }}>
                                 <div style={{ display: "flex" }}>
                                     <div className="table-head-item">Data for</div>
@@ -157,7 +157,7 @@ class LineSettings extends React.Component {
                             </div>
                         </div>
                         <div className="settings-option-title" onClick={() => this.toggleSettings("settings-dropdown")}>Settings</div>
-                        <div id="settings-dropdown">
+                        <div id="settings-dropdown" style={{display: "none", margin: 25}}>
                             <div className="dataset-table" style={{ width: "100%" }}>
                                 <div style={{ display: "flex" }}>
                                     <div className="table-head-item">Label</div>

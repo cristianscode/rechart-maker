@@ -92,6 +92,8 @@ a{
     background-color: #1b1f22;
     margin: auto auto;
     display: block;
+    padding: 25px;
+    border-radius: 20px;
 }
 
 .settings-option-title{
