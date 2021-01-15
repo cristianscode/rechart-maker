@@ -45,6 +45,7 @@ a{
 
 .chart-container{
     display: flex;
+    width: 100%;
 }
 
 .settings-sidebar{
@@ -54,6 +55,12 @@ a{
     min-width: 300px !important;
     min-height: 100vh;
     background-color: #121416;
+}
+
+.line-settings-sidebar{
+    width: 100%;
+    min-height: auto;
+    text-align: center;
 }
 
 .chartjs-render-monitor{
@@ -78,6 +85,13 @@ a{
      margin-left: 0px;
      padding: 25px;
      border-radius: 20px;
+}
+
+.line-container{
+    max-width: 1400px;
+    background-color: #1b1f22;
+    margin: auto auto;
+    display: block;
 }
 
 .settings-option-title{

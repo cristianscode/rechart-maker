@@ -9,7 +9,7 @@ function LineChart(props) {
       };
     return (
         <div className="chart-container">
-            <div>
+            <div className="line-container">
                 <div className="center"><Line data={state} /></div>
                 <div className="code-container">
                     <code>Code</code>
