@@ -29,6 +29,7 @@ function TableRowData(props) {
                 })
                 }
             </div>
+
         )
     })
     return inputs
@@ -97,11 +98,40 @@ class LineSettings extends React.Component {
         })
     }
 
-    addData = (event) => {
+    removeLabel = () => {
+        this.setState(prevState => {
+            var tempLabels = new Array();
+            var tempData = new Array();
+            prevState.labels.map((i, index) => {
+                if (index < prevState.labels.length - 1)
+                    tempLabels.push(i);
+            })
+            prevState.datasets.map(i => {
+                var arr = i.data.map(d => { return d })
+                arr.pop()
+                var t = {
+                    label: i.label,
+                    data: arr,
+                    fill: i.fill,
+                    backgroundColor: i.backgroundColor,
+                    borderColor: i.borderColor
+                }
+                tempData.push(t);
+            })
+            console.log(tempData)
+            console.log(tempLabels)
+            return {
+                datasets: tempData,
+                labels: tempLabels
+            }
+        })
+    }
+
+    addData = () => {
         this.setState(prevState => {
             var newData = {
                 label: "New Set",
-                data: [5, 10, 15, 20, 25, 30],
+                data: prevState.datasets[0].data.map((i, index) => { return index * 5; }),
                 fill: false,
                 backgroundColor: "",
                 borderColor: "#ffffff"
@@ -117,9 +147,38 @@ class LineSettings extends React.Component {
         })
     }
 
+    addLabel = () => {
+        this.setState(prevState => {
+            var tempLabels = new Array();
+            var tempData = new Array();
+            prevState.labels.map((i, index) => {
+                tempLabels.push(i);
+            })
+            prevState.datasets.map((i, index) => {
+                var arr = i.data.map(d => {
+                    return d
+                })
+                arr.push(10);
+                var t = {
+                    label: i.label,
+                    data: arr,
+                    fill: i.fill,
+                    backgroundColor: i.backgroundColor,
+                    borderColor: i.borderColor
+                }
+                tempData.push(t);
+            })
+            tempLabels.push("New Col");
+            return {
+                datasets: tempData,
+                labels: tempLabels
+            }
+        })
+    }
+
     propertyChange = (event, key, index) => {
         this.setState(prevState => {
-            if (key == "fill"){
+            if (key == "fill") {
                 prevState.datasets[index][key] = event
                 prevState.datasets[index]["backgroundColor"] = "#FFFFFF"
             }
@@ -139,7 +198,7 @@ class LineSettings extends React.Component {
                     <h1>Line Chart Settings</h1>
                     <div>
                         <div className="settings-option-title" onClick={() => this.toggleSettings("dataset-dropdown")}>Dataset</div>
-                        <div id="dataset-dropdown" style={{display: "none", margin: 25}}>
+                        <div id="dataset-dropdown" style={{ display: "none", margin: 25 }}>
                             <div className="dataset-table" style={{ width: "100%" }}>
                                 <div style={{ display: "flex" }}>
                                     <div className="table-head-item">Data for</div>
@@ -152,12 +211,23 @@ class LineSettings extends React.Component {
                                     }
                                 </div>
                                 <TableRowData datasets={this.state.datasets} updateData={this.dataChange} />
-                                <div className="add-input" onClick={this.addData}><i className="fas fa-plus" /></div>
-                                <div className="add-input" onClick={this.removeData}><i className="fas fa-minus" /></div>
+                                <div style={{ height: 50 }}>
+                                    <div>
+                                        <div className="add-input" style={{ float: "left" }} onClick={this.addData}><i className="fas fa-plus" /></div>
+                                        <div className="add-input" style={{ float: "left" }} onClick={this.removeData}><i className="fas fa-minus" /></div>
+                                        <div className="add-input" style={{ float: "left", backgroundColor: "rgba(206, 206, 206, 0.822)" }}>Edit Row</div>
+                                    </div>
+                                    <div>
+                                        <div className="add-input" style={{ float: "right" }} onClick={this.addLabel}><i className="fas fa-plus" /></div>
+                                        <div className="add-input" style={{ float: "right" }} onClick={this.removeLabel}><i className="fas fa-minus" /></div>
+                                        <div className="add-input" style={{ float: "right", backgroundColor: "rgba(206, 206, 206, 0.822)" }}>Edit Col</div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div className="settings-option-title" onClick={() => this.toggleSettings("settings-dropdown")}>Settings</div>
-                        <div id="settings-dropdown" style={{display: "none", margin: 25}}>
+                        <div id="settings-dropdown" style={{ display: "none", margin: 25 }}>
                             <div className="dataset-table" style={{ width: "100%" }}>
                                 <div style={{ display: "flex" }}>
                                     <div className="table-head-item">Label</div>
