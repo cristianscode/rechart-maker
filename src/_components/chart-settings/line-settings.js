@@ -191,6 +191,21 @@ class LineSettings extends React.Component {
         })
     }
 
+    updateLabel = (event, index) =>{
+        this.setState(prevState => {
+            var tempLabels = new Array();
+            
+            prevState.labels.map((i, currindex) => {
+                if(currindex == index)
+                    tempLabels.push(event.target.value)
+                else tempLabels.push(i);
+            })
+            return {
+                labels: tempLabels
+            }
+        })
+    }
+
     render = () => {
         return (
             <div>
@@ -201,11 +216,11 @@ class LineSettings extends React.Component {
                         <div id="dataset-dropdown" style={{ display: "none", margin: 25 }}>
                             <div className="dataset-table" style={{ width: "100%" }}>
                                 <div style={{ display: "flex" }}>
-                                    <div className="table-head-item">Data for</div>
+                                    <div className="input-row-item">Data for</div>
                                     {
                                         this.state.labels.map((l, index) => {
                                             return (
-                                                <div className="table-head-item" key={index}>{l}</div>
+                                                <input type="text" value={l} className="input-row-item" key={index} onChange={e => this.updateLabel(e, index)} />
                                             )
                                         })
                                     }
