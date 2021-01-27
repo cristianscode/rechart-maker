@@ -63,7 +63,7 @@ class LineSettings extends React.Component {
     toggleSettings = (id) => {
         if (document.getElementById(id)) {
             var element = document.getElementById(id);
-            if (element.style.display == "none")
+            if (element.style.display ==="none")
                 document.getElementById(id).style.display = "block";
             else
                 document.getElementById(id).style.display = "none";
@@ -72,8 +72,8 @@ class LineSettings extends React.Component {
 
     dataChange = (event, index, arrayIndex) => {
         this.setState(prevState => {
-            var temp = new Array();
-            prevState.datasets[index].data.map((i, index) => {
+            var temp = [];
+            prevState.datasets[index].data.foreach((i, index) => {
                 if (arrayIndex === index)
                     temp.push(parseInt(event.target.value));
                 else temp.push(i)
@@ -87,9 +87,9 @@ class LineSettings extends React.Component {
 
     removeData = () => {
         this.setState(prevState => {
-            var tempData = new Array();
-            prevState.datasets.map((i, index) => {
-                if (index != prevState.datasets.length - 1)
+            var tempData = [];
+            prevState.datasets.foreach((i, index) => {
+                if (index !== prevState.datasets.length - 1)
                     tempData.push(i)
             })
             return {
@@ -100,13 +100,13 @@ class LineSettings extends React.Component {
 
     removeLabel = () => {
         this.setState(prevState => {
-            var tempLabels = new Array();
-            var tempData = new Array();
-            prevState.labels.map((i, index) => {
+            var tempLabels = [];
+            var tempData = [];
+            prevState.labels.foreach((i, index) => {
                 if (index < prevState.labels.length - 1)
                     tempLabels.push(i);
             })
-            prevState.datasets.map(i => {
+            prevState.datasets.foreach(i => {
                 var arr = i.data.map(d => { return d })
                 arr.pop()
                 var t = {
@@ -136,8 +136,8 @@ class LineSettings extends React.Component {
                 backgroundColor: "",
                 borderColor: "#ffffff"
             }
-            var tempData = new Array();
-            prevState.datasets.map(i => {
+            var tempData = [];
+            prevState.datasets.foreach(i => {
                 tempData.push(i)
             })
             tempData.push(newData)
@@ -149,12 +149,12 @@ class LineSettings extends React.Component {
 
     addLabel = () => {
         this.setState(prevState => {
-            var tempLabels = new Array();
-            var tempData = new Array();
-            prevState.labels.map((i, index) => {
+            var tempLabels = [];
+            var tempData = [];
+            prevState.labels.foreach((i, index) => {
                 tempLabels.push(i);
             })
-            prevState.datasets.map((i, index) => {
+            prevState.datasets.foreach((i, index) => {
                 var arr = i.data.map(d => {
                     return d
                 })
@@ -178,7 +178,7 @@ class LineSettings extends React.Component {
 
     propertyChange = (event, key, index) => {
         this.setState(prevState => {
-            if (key == "fill") {
+            if (key ==="fill") {
                 prevState.datasets[index][key] = event
                 prevState.datasets[index]["backgroundColor"] = "#FFFFFF"
             }
@@ -193,10 +193,10 @@ class LineSettings extends React.Component {
 
     updateLabel = (event, index) =>{
         this.setState(prevState => {
-            var tempLabels = new Array();
+            var tempLabels = [];
             
-            prevState.labels.map((i, currindex) => {
-                if(currindex == index)
+            prevState.labels.foreach((i, currindex) => {
+                if(currindex === index)
                     tempLabels.push(event.target.value)
                 else tempLabels.push(i);
             })

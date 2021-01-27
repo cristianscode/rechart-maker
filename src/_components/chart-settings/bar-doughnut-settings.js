@@ -58,8 +58,8 @@ class BarDoughnutSettings extends React.Component {
         if (key === "data" && v !== '')
             v = parseInt(v)
         this.setState(prevState => {
-            var temp = new Array();
-            prevState[key].map((i, prevIndex) => {
+            var temp = [];
+            prevState[key].foreach((i, prevIndex) => {
                 if (index === prevIndex)
                     temp.push(v);
                 else temp.push(i)
@@ -110,13 +110,13 @@ class BarDoughnutSettings extends React.Component {
 
     addRow = () => {
         this.setState(prevState => {
-            var tempData = new Array();
-            var tempLabel = new Array();
-            var tempFill = new Array();
-            var tempFillHover = new Array();
-            var tempBorder = new Array();
-            var tempBorderHover = new Array();
-            prevState.labels.map((i, index) => {
+            var tempData = [];
+            var tempLabel = [];
+            var tempFill = [];
+            var tempFillHover = [];
+            var tempBorder = [];
+            var tempBorderHover = [];
+            prevState.labels.foreach((i, index) => {
                 tempLabel.push(i)
                 tempData.push(prevState.data[index])
                 tempFill.push(prevState.fillColor[index])
@@ -127,7 +127,7 @@ class BarDoughnutSettings extends React.Component {
             tempData.push(10);
             tempData.push(0);
             tempLabel.push("Label");
-            if (prevState.fillColor.length != 0) {
+            if (prevState.fillColor.length !== 0) {
                 tempFill.push(prevState.fillColor[0])
                 tempFillHover.push(prevState.fillHover[0])
                 tempBorder.push(prevState.borderColor[0])
@@ -151,19 +151,19 @@ class BarDoughnutSettings extends React.Component {
 
     removeRow = () => {
         this.setState(prevState => {
-            var tempData = new Array();
-            var tempLabel = new Array();
-            var tempFill = new Array();
-            var tempFillHover = new Array();
-            var tempBorder = new Array();
-            var tempBorderHover = new Array();
-            prevState.data.map((i, index) => {
-                if (index != prevState.data.length - 1)
+            var tempData = [];
+            var tempLabel = [];
+            var tempFill = [];
+            var tempFillHover = [];
+            var tempBorder = [];
+            var tempBorderHover = [];
+            prevState.data.foreach((i, index) => {
+                if (index !== prevState.data.length - 1)
                     tempData.push(i)
             })
             tempData[tempData.length - 1] = 0;
-            prevState.labels.map((i, index) => {
-                if (index != prevState.labels.length - 1) {
+            prevState.labels.foreach((i, index) => {
+                if (index !== prevState.labels.length - 1) {
                     tempLabel.push(i)
                     tempFill.push(prevState.fillColor[index])
                     tempFillHover.push(prevState.fillHover[index])

@@ -1,5 +1,4 @@
 import './App.css';
-import LineChart from "./_components/chart-types/line-chart"
 import ChartSelection from "./_components/chart-selection"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BarDoughnutSettings from './_components/chart-settings/bar-doughnut-settings';
