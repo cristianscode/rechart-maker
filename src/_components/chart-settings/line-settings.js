@@ -9,8 +9,12 @@ function TableRow(props) {
                 <div className="input-row-item">
                     <input type="checkbox" checked={i.fill} onChange={e => props.changeFunction(!i.fill, "fill", index)} />
                 </div>
-                <input type="text" className="input-row-item" value={i.backgroundColor} onChange={e => props.changeFunction(e, "backgroundColor", index)} />
-                <input type="text" className="input-row-item" value={i.borderColor} onChange={e => props.changeFunction(e, "borderColor", index)} />
+                <div className="input-row-item">
+                <input type="color" className="colorPicker" value={i.backgroundColor} onChange={e => props.changeFunction(e, "backgroundColor", index)} />
+                </div>
+                <div className="input-row-item">
+                <input type="color" className="colorPicker" value={i.borderColor} onChange={e => props.changeFunction(e, "borderColor", index)} />
+                </div>
             </div>
         )
     })
@@ -73,7 +77,7 @@ class LineSettings extends React.Component {
     dataChange = (event, index, arrayIndex) => {
         this.setState(prevState => {
             var temp = [];
-            prevState.datasets[index].data.foreach((i, index) => {
+            prevState.datasets[index].data.map((i, index) => {
                 if (arrayIndex === index)
                     temp.push(parseInt(event.target.value));
                 else temp.push(i)
@@ -88,7 +92,7 @@ class LineSettings extends React.Component {
     removeData = () => {
         this.setState(prevState => {
             var tempData = [];
-            prevState.datasets.foreach((i, index) => {
+            prevState.datasets.map((i, index) => {
                 if (index !== prevState.datasets.length - 1)
                     tempData.push(i)
             })
@@ -102,11 +106,11 @@ class LineSettings extends React.Component {
         this.setState(prevState => {
             var tempLabels = [];
             var tempData = [];
-            prevState.labels.foreach((i, index) => {
+            prevState.labels.map((i, index) => {
                 if (index < prevState.labels.length - 1)
                     tempLabels.push(i);
             })
-            prevState.datasets.foreach(i => {
+            prevState.datasets.map(i => {
                 var arr = i.data.map(d => { return d })
                 arr.pop()
                 var t = {
@@ -137,7 +141,7 @@ class LineSettings extends React.Component {
                 borderColor: "#ffffff"
             }
             var tempData = [];
-            prevState.datasets.foreach(i => {
+            prevState.datasets.map(i => {
                 tempData.push(i)
             })
             tempData.push(newData)
@@ -151,10 +155,10 @@ class LineSettings extends React.Component {
         this.setState(prevState => {
             var tempLabels = [];
             var tempData = [];
-            prevState.labels.foreach((i, index) => {
+            prevState.labels.map((i, index) => {
                 tempLabels.push(i);
             })
-            prevState.datasets.foreach((i, index) => {
+            prevState.datasets.map((i, index) => {
                 var arr = i.data.map(d => {
                     return d
                 })
@@ -195,7 +199,7 @@ class LineSettings extends React.Component {
         this.setState(prevState => {
             var tempLabels = [];
             
-            prevState.labels.foreach((i, currindex) => {
+            prevState.labels.map((i, currindex) => {
                 if(currindex === index)
                     tempLabels.push(event.target.value)
                 else tempLabels.push(i);

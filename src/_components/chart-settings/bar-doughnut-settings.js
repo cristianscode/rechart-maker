@@ -11,7 +11,9 @@ function TableRow(props) {
             <div className="input-row" key={index}>
                 <input type="text" className="input-row-item" value={item} onChange={(e) => props.f(e, "labels", index)} />
                 <input type="text" className="input-row-item" value={props.values.data[index]} onChange={(e) => props.f(e, "data", index)} />
-                <input type="text" className="input-row-item" value={extraValue[index]} onChange={(e) => props.f(e, extraColValue, index)} />
+                <div className="input-row-item" >
+                    <input type="color" className="colorPicker" value={extraValue[index]} onChange={(e) => props.f(e, extraColValue, index)} />
+                </div>
             </div>
         )
     })
@@ -59,7 +61,7 @@ class BarDoughnutSettings extends React.Component {
             v = parseInt(v)
         this.setState(prevState => {
             var temp = [];
-            prevState[key].foreach((i, prevIndex) => {
+            prevState[key].map((i, prevIndex) => {
                 if (index === prevIndex)
                     temp.push(v);
                 else temp.push(i)
@@ -116,7 +118,7 @@ class BarDoughnutSettings extends React.Component {
             var tempFillHover = [];
             var tempBorder = [];
             var tempBorderHover = [];
-            prevState.labels.foreach((i, index) => {
+            prevState.labels.map((i, index) => {
                 tempLabel.push(i)
                 tempData.push(prevState.data[index])
                 tempFill.push(prevState.fillColor[index])
@@ -157,12 +159,12 @@ class BarDoughnutSettings extends React.Component {
             var tempFillHover = [];
             var tempBorder = [];
             var tempBorderHover = [];
-            prevState.data.foreach((i, index) => {
+            prevState.data.map((i, index) => {
                 if (index !== prevState.data.length - 1)
                     tempData.push(i)
             })
             tempData[tempData.length - 1] = 0;
-            prevState.labels.foreach((i, index) => {
+            prevState.labels.map((i, index) => {
                 if (index !== prevState.labels.length - 1) {
                     tempLabel.push(i)
                     tempFill.push(prevState.fillColor[index])
