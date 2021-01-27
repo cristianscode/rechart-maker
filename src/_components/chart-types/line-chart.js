@@ -3,29 +3,35 @@ import { Line } from "react-chartjs-2"
 
 function SettingsToString(props) {
     return (
-        <p>
-            {"const state = {"}<br />
+        <div>
+            <p>
+                {"const state = {"}<br />
     &emsp;&emsp;{"labels: [" + props.state.labels.map(item => { return "'" + item + "'"; }) + "],"}<br />
     &emsp;&emsp;{"datasets: ["} <br />
-            {
-                props.state.datasets.map(i => {
-                    return (
-                        <div>
-                            &emsp;&emsp;&emsp;&emsp;{"{"} <br />
+                {
+                    props.state.datasets.map(i => {
+                        return (
+                            <div>
+                                &emsp;&emsp;&emsp;&emsp;{"{"} <br />
                             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"label: '" + i.label + "'"}, <br />
                             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"data: [" + i.data.map(item => { return item; }) + "]"}, <br />
                             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"fill: " + i.fill}, <br />
                             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"backgroundColor: '" + i.backgroundColor + "'"}, <br />
                             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{"borderColor: '" + i.borderColor + "'"} <br />
                             &emsp;&emsp;&emsp;&emsp;{"},"} <br />
-                        </div>
+                            </div>
 
-                    )
-                })
-            }
+                        )
+                    })
+                }
     &emsp;&emsp;{"]"}<br />
-            {"}"}
-        </p>
+                {"}"}
+                <br />
+                <br />
+            </p>
+            <p style={{ color: "#fca311" }}>{"<LineChart state={this.state} />"}</p>
+        </div>
+
     )
 }
 
